@@ -14,6 +14,8 @@ import {LANGUAGE, PAGE_AUTHENTICATION, PAGE_COLLECTION} from "../../../util/cons
 import {useState} from "react";
 import {ENG} from "../../../util/constants/language";
 import {useNavigate} from "react-router";
+import {SHADE_BLUE} from "../../../util/constants/color";
+import PagesIcon from '@mui/icons-material/Pages';
 
 
 const item = {
@@ -80,21 +82,22 @@ export default function Navigator(props) {
     return (
         <Drawer variant="permanent" {...other}>
             <List disablePadding>
-                <ListItem sx={{...item, ...itemCategory, fontSize: 22, color: '#fff'}}>
-                    {lan === ENG ? 'Dashboard' : 'Панель'}
+                <ListItem sx={{...item, ...itemCategory, fontSize: 22, marginTop:'20px',marginBottom:'20px'}}>
+                    {/*{lan === ENG ? 'DASHBOARD' : 'ПАНЕЛЬ'}*/}
+                    {'🅲🅾🅻🅻🅴🅲🆃🅸🅽'}
                 </ListItem>
 
-                <ListItem sx={{...item, ...itemCategory}} onClick={navigateHomePage}>
+                <ListItem  sx={{...item, ...itemCategory}} onClick={()=>{navigate("/")}}>
                     <ListItemIcon>
-                        <HomeIcon/>
+                        <PagesIcon/>
                     </ListItemIcon>
-                    <ListItemText>{lan===ENG?'Home page':'Главный страница'}</ListItemText>
+                    <ListItemText>{lan===ENG?'MAIN':'ГЛАВНЫЙ'}</ListItemText>
                 </ListItem>
 
                 {
                     categories.map(({id, children}) => (
                         (id === 'Admin' && (user.roles & 2) === 0) ? '' :
-                            <Box key={id} sx={{bgcolor: '#101F33'}}>
+                            <Box key={id} sx={{bgcolor: SHADE_BLUE}}>
                                 <ListItem sx={{py: 2, px: 3}}>
                                     <ListItemText sx={{color: '#fff'}}>{id}</ListItemText>
                                 </ListItem>

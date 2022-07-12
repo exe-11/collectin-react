@@ -34,7 +34,7 @@ const slice = createSlice({
             state.item = data ? data : {}
         },
         onGetTopics: (state, {payload: {data}}) => {
-            console.log("topic", );
+            console.log("topic",);
             state.topics = data ? data : []
         },
         onSuccess: (state, {payload: {message}}) => {
@@ -56,10 +56,11 @@ const slice = createSlice({
             fileDownload(payload, 'collection.csv')
         },
         onSearch: (state, {payload: {data}}) => {
-            console.log("search: ", data);
+            console.log("onSearch: ", data);
             state.searchResult = data ? data : ''
         },
         onGetSearchResult: (state, {payload: {data}}) => {
+            console.log('onGetSearchResult: ',data)
             state.searchData = data
             state.items = data
             state.item = data
@@ -75,6 +76,7 @@ const slice = createSlice({
 
 export const {clearImg} = slice.actions
 
+
 export const getLatest = () => apiCall({
     url: '/collection/latest',
     method: 'GET',
@@ -83,12 +85,21 @@ export const getLatest = () => apiCall({
 });
 
 export const deleteCollection = (id) => apiCall({
-    url: '/collection/' + id,
-    method: 'DELETE',
+    url: '/collection/delete/' + id,
+    method: 'GET',
     onSuccess: slice.actions.onDeleteSuccess.type,
     onFail: slice.actions.onFail.type,
     headers: {Authorization: localStorage.getItem(ACCESS_TOKEN)},
 });
+
+export const getAllCollectionForAdmin = () => apiCall({
+    url: '/collection/all',
+    method: 'GET',
+    onSuccess: slice.actions.onGetAllSuccess.type,
+    onFail: slice.actions.onFail.type,
+    headers: {Authorization: localStorage.getItem(ACCESS_TOKEN)},
+});
+
 
 export const getAllCollectionsByUserId = (userId) => apiCall({
     url: '/collection/user/' + userId,
@@ -119,8 +130,8 @@ export const getItemsByTag = (tag_id) => apiCall({
 });
 
 export const deleteItem = (id) => apiCall({
-    url: '/item/' + id,
-    method: 'DELETE',
+    url: '/item/delete/' + id,
+    method: 'GET',
     onSuccess: slice.actions.onSuccess.type,
     onFail: slice.actions.onFail.type,
     headers: {Authorization: localStorage.getItem(ACCESS_TOKEN)},
@@ -201,7 +212,7 @@ export const searchText = (text) => apiCall({
     onFail: slice.actions.onFail.type,
 });
 export const getResultOfSearch = (param) => apiCall({
-    url: '/search?' + param,
+    url: '/search/element?' + param,
     method: 'GET',
     onSuccess: slice.actions.onGetSearchResult.type,
     onFail: slice.actions.onFail.type,

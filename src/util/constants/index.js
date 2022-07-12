@@ -1,7 +1,9 @@
 import {ENG} from "./language";
 
-const BACK_HOST = '3.85.44.163:8080'
-const FRONT_HOST = '3.86.116.86:3000'
+// const BACK_HOST = '107.20.54.194:8080'
+// const FRONT_HOST = '52.90.30.230:3000'
+const BACK_HOST = '127.0.0.1:8080'
+const FRONT_HOST = '127.0.0.1:3000'
 
 
 export const BASE_URL = 'http://' + BACK_HOST;
@@ -25,12 +27,12 @@ export const MODE = 'collect-mode';
 export const MODE_LIGHT = 'collect-mode';
 export const MODE_DARK = 'collect-mode';
 const lan = localStorage.getItem(LANGUAGE)
-export const PAGE_AUTHENTICATION = lan === ENG ? 'User Management' : 'Управление пользователями'
-export const PAGE_COLLECTION = lan === ENG ? 'Collection' : 'Коллекция'
+export const PAGE_AUTHENTICATION = lan === ENG ? 'ᑌ𝘚Eᖇ ᗰᗩᑎᗩGEᗰEᑎT' : 'УПРАВЛЕНИЕ ПОЛЬЗОВАТЕЛЯМИ'
+export const PAGE_COLLECTION = lan === ENG ? 'ᑕOᒪᒪEᑕTIOᑎ𝘚' : 'КОЛЛЕКЦИИ'
 
 
 export const UN_BLOCK = lan === ENG ? 'ACTIVE' : 'АКТИВНЫЙ'
 export const BLOCK = lan === ENG ? 'BLOCKED' : 'ЗАБЛОКИРОВАНО'
 export const DELETE = lan === ENG ? 'DELETED' : 'УДАЛЕНО'
-export const GIVE_PERMISSION = lan === ENG ? 'Give Permission' : 'Дать разрешение'
-export const GET_PERMISSION = lan === ENG ? 'Get Permission' : 'Получить разрешение'
+export const GIVE_PERMISSION = lan === ENG ? 'AUTHORIZE' : 'АВТОРИЗОВАТЬ'
+export const GET_PERMISSION = lan === ENG ? 'DISAPPROVE' : 'ОТКАЗАТЬСЯ'

@@ -76,7 +76,8 @@ function ItemPage({item, user, putLike, getItem, getMe, authorization}) {
     }
 
     const addComment = (content) => {
-        comments.unshift(content)
+        comments.unshift(content.data)
+        console.log('addComment',comments)
         setComments([...comments])
     }
 
@@ -133,6 +134,7 @@ function ItemPage({item, user, putLike, getItem, getMe, authorization}) {
         setComment('')
     }
 
+    console.log('comments',comments)
     return (
         <Paper
             sx={{
@@ -192,7 +194,7 @@ function ItemPage({item, user, putLike, getItem, getMe, authorization}) {
                                                                           height: option.height
                                                                       }}>
                                                     {
-                                                        column.name === 'tag' ? item.tags.map(tag => parse(lan=== ENG ? tag.name_eng : tag.name_rus + '<br>')) :
+                                                        column.name === 'tag' ? item.tags.map(tag => parse(lan=== ENG ? tag.name : tag.name + '<br>')) :
                                                             item.fields.values[item.id]
                                                                 .map(cell =>
                                                                     column.id === cell.field_id ?
@@ -243,8 +245,9 @@ function ItemPage({item, user, putLike, getItem, getMe, authorization}) {
                                     </TableCell>
                                 </TableRow>
                                 {
+
                                     comments.map(item => <TableRow key={item.id}>
-                                            <TableCell>
+                                            <TableCell key={item.id}>
                                                 <CardHeader
                                                     avatar={
                                                         <Avatar sx={{bgcolor: red[500]}} aria-label="recipe"
@@ -277,4 +280,3 @@ function ItemPage({item, user, putLike, getItem, getMe, authorization}) {
 export default connect(({collection: {item}, user: {user, authorization}}) => ({item, user, authorization}),
     {putLike, saveComment, getItem, getMe}
 )(ItemPage)
-

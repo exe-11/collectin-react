@@ -15,6 +15,7 @@ import Editor from "../editor/editor";
 import {STRING, types} from "../../util/constants/type";
 import {LANGUAGE} from "../../util/constants";
 import {ENG} from "../../util/constants/language";
+import {useNavigate} from "react-router";
 
 const theme = createTheme();
 
@@ -22,6 +23,8 @@ const theme = createTheme();
 function AddCollection({user, image_url, getTopics, addCollection, topics, saveImg, clearImg}) {
 
     const lan = localStorage.getItem(LANGUAGE)
+
+    const navigate = useNavigate();
 
     const [topicId, setTopicId] = useState({});
 
@@ -51,11 +54,16 @@ function AddCollection({user, image_url, getTopics, addCollection, topics, saveI
             user_id: user.id,
             custom_fields: fields
         }
+        console.log('temp', temp);
         if (file.size !== 0) {
             setData(temp)
             saveImg(data)
-        } else
+        }
+        {
             addCollection(temp)
+            console.log('addCol', temp)
+            navigate('/dashboard')
+        }
     };
 
     function handleChange(event) {
@@ -92,6 +100,7 @@ function AddCollection({user, image_url, getTopics, addCollection, topics, saveI
 
     useEffect(() => {
         getTopics()
+        console.log('topic', topics)
     }, [])
 
     useEffect(() => {
@@ -122,25 +131,27 @@ function AddCollection({user, image_url, getTopics, addCollection, topics, saveI
                                     required
                                     fullWidth
                                     id="name"
-                                    label={lan===ENG?"Name":'Имя'}
+                                    label={lan === ENG ? "Name" : 'Имя'}
                                     autoFocus
                                 />
                             </Grid>
 
                             <Grid item xs={12} sm={6}>
                                 <FormControl fullWidth>
-                                    <InputLabel id="demo-simple-select-label">{lan===ENG?'Topic':'Тема'}</InputLabel>
+                                    <InputLabel
+                                        id="demo-simple-select-label">{lan === ENG ? 'Topic' : 'Тема'}</InputLabel>
                                     <Select
                                         labelId="topicId"
                                         id="topicId"
-                                        label={lan===ENG?"Topic":'Тема'}
+                                        label={lan === ENG ? "Topic" : 'Тема'}
                                         defaultValue=""
                                         onChange={handleChange}
                                     >
                                         {
+                                            //topic without 2 languages
                                             topics.map(item => (
                                                 <MenuItem key={item.id}
-                                                          value={item.id}>{lan===ENG ? item.name_eng : item.name_rus}
+                                                          value={item.id}>{lan === ENG ? item.name : item.name}
                                                 </MenuItem>
                                             ))
                                         }
@@ -175,7 +186,7 @@ function AddCollection({user, image_url, getTopics, addCollection, topics, saveI
                                                     required
                                                     fullWidth
                                                     id="name"
-                                                    label={lan===ENG?"Field Name":'Имя поля'}
+                                                    label={lan === ENG ? "Field Name" : 'Имя поля'}
                                                     autoFocus
                                                     value={field.name}
                                                     onChange={(event) => saveFieldName(event, field.id)}
@@ -187,7 +198,7 @@ function AddCollection({user, image_url, getTopics, addCollection, topics, saveI
                                                     <Select
                                                         labelId="type"
                                                         id="type"
-                                                        label={lan===ENG?"Field Type":'Тип поля'}
+                                                        label={lan === ENG ? "Field Type" : 'Тип поля'}
                                                         value={field.type}
                                                         onChange={(event) => handleChangeFieldType(event, field.id)}
                                                     >
@@ -228,7 +239,7 @@ function AddCollection({user, image_url, getTopics, addCollection, topics, saveI
                                     sx={{mt: 3, mb: 2}}
                                     onClick={addRowForField}
                                 >
-                                    &#10010; {lan===ENG?'Add field':'Добавить поле'}
+                                    &#10010; {lan === ENG ? 'Add field' : 'Добавить поле'}
                                 </Button>
                             </Grid>
                             <Grid item xs={12} sm={6}>
@@ -238,7 +249,7 @@ function AddCollection({user, image_url, getTopics, addCollection, topics, saveI
                                     variant="contained"
                                     sx={{mt: 3, mb: 2}}
                                 >
-                                    {lan===ENG?'Save':'Сохранять'}
+                                    {lan === ENG ? 'Save' : 'Сохранять'}
                                 </Button>
                             </Grid>
                         </Grid>

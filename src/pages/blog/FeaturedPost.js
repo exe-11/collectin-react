@@ -23,7 +23,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import post from '../../util/img/post/post.png'
 import {LANGUAGE} from "../../util/constants";
 
-function FeaturedPost({collection, getItemsByCollectionId, deleteCollection, download}) {
+function FeaturedPost({collection, getItemsByCollectionId, deleteCollection, download, collections}) {
 
     const navigate = useNavigate()
 
@@ -41,6 +41,7 @@ function FeaturedPost({collection, getItemsByCollectionId, deleteCollection, dow
 
     function delCollection(collection_id) {
         deleteCollection(collection_id)
+        collections = collections.filter(col => col.id !== collection_id)
     }
 
     function downloadCSV(id) {

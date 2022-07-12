@@ -11,3 +11,5 @@ export const WHITE='white'
 export const RED='red'
 export const DARK='dark'
 export const ORANGE='orange'
+
+export const SHADE_BLUE = '#091627'

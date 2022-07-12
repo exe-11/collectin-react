@@ -14,7 +14,9 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import {LANGUAGE, PAGE_AUTHENTICATION} from "../../../util/constants";
 import {ADD_COLLECTION, ADD_ITEM, COLLECTION_LIST} from "../../../util/constants/pages";
-import {ENG} from "../../../util/constants/language";
+import {ENG, RUS} from "../../../util/constants/language";
+import {SHADE_BLUE} from "../../../util/constants/color";
+
 
 const lightColor = 'rgba(255, 255, 255, 0.7)';
 
@@ -22,25 +24,26 @@ function Header({crtPage, collectionPageVal, onDrawerToggle, user, setCollection
 
     const lan = localStorage.getItem(LANGUAGE)
 
-    const user_page = <AppBar component="div" position="static" elevation={0} sx={{zIndex: 0}}>
+    const user_page = <AppBar component="div" position="static" elevation={0} sx={{zIndex: 0, bgcolor:SHADE_BLUE}}>
         <Tabs value={0} textColor="inherit">
-            <Tab label={lan===ENG?"Users":'Пользователи'}/>
+            <Tab label={lan === RUS ? 'ПОЛЬЗОВАТЕЛИ' : "USERS"}/>
         </Tabs>
     </AppBar>
 
-    const collection_page = <AppBar component="div" position="static" elevation={0} sx={{zIndex: 0}}>
+    const collection_page = <AppBar component="div" position="static" elevation={0} sx={{zIndex: 0,bgcolor: SHADE_BLUE}}>
         <Tabs value={collectionPageVal} textColor="inherit">
-            <Tab label={lan===ENG?"Collections":'Коллекции'} onClick={() => setCollectionPageVal(COLLECTION_LIST)}/>
-            <Tab label={lan===ENG?"Add Collection":'Добавить коллекцию'} onClick={() => setCollectionPageVal(ADD_COLLECTION)}/>
-            <Tab label={lan===ENG?"Add Item":'Добавить элемент'} onClick={() => setCollectionPageVal(ADD_ITEM)}/>
+            <Tab label={lan === RUS ? 'КОЛЛЕКЦИЯ' : "COLLECTIONS"}
+                 onClick={() => setCollectionPageVal(COLLECTION_LIST)}/>
+            <Tab label={lan === RUS ? '➕ КОЛЛЕКЦИЮ' : "➕ COLLECTION"}
+                 onClick={() => setCollectionPageVal(ADD_COLLECTION)}/>
+            <Tab label={lan === RUS ? '➕ ЭЛЕМЕНТ' : "➕ ITEM"} onClick={() => setCollectionPageVal(ADD_ITEM)}/>
         </Tabs>
     </AppBar>
-
 
 
     return (
         <React.Fragment>
-            <AppBar color="primary" position="sticky" elevation={0}>
+            <AppBar color="primary" position="sticky" elevation={0} sx={{bgcolor:SHADE_BLUE}}>
                 <Toolbar>
                     <Grid container spacing={1} alignItems="center">
                         <Grid sx={{display: {sm: 'none', xs: 'block'}}} item>
@@ -68,7 +71,7 @@ function Header({crtPage, collectionPageVal, onDrawerToggle, user, setCollection
                 color="primary"
                 position="static"
                 elevation={0}
-                sx={{zIndex: 0}}
+                sx={{zIndex: 0,bgcolor:SHADE_BLUE}}
             >
                 <Toolbar>
                     <Grid container alignItems="center" spacing={1}>
@@ -78,22 +81,22 @@ function Header({crtPage, collectionPageVal, onDrawerToggle, user, setCollection
                             </Typography>
                         </Grid>
                         <Grid item>
-                            <Button
-                                sx={{borderColor: lightColor}}
-                                variant="outlined"
-                                color="inherit"
-                                size="small"
-                                href='/'
-                            >
-                                {lan===ENG?'Menu':'Меню'}
-                            </Button>
+                            {/*<Button*/}
+                            {/*    sx={{borderColor: lightColor}}*/}
+                            {/*    variant="outlined"*/}
+                            {/*    color="inherit"*/}
+                            {/*    size="small"*/}
+                            {/*    href='/'*/}
+                            {/*>*/}
+                            {/*    {lan===ENG?'Menu':'Меню'}*/}
+                            {/*</Button>*/}
                         </Grid>
                         <Grid item>
-                            <Tooltip title="Help">
-                                <IconButton color="inherit">
-                                    <HelpIcon/>
-                                </IconButton>
-                            </Tooltip>
+                            {/*<Tooltip title="Help">*/}
+                            {/*    <IconButton color="inherit">*/}
+                            {/*        <HelpIcon/>*/}
+                            {/*    </IconButton>*/}
+                            {/*</Tooltip>*/}
                         </Grid>
                     </Grid>
                 </Toolbar>

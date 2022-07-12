@@ -9,7 +9,7 @@ import Footer from './Footer';
 import {useEffect, useState} from "react";
 import {connect} from "react-redux";
 import {getLatest, getTags, getItemsByCollectionId, getItemsByTag, download} from "../../store/reducer/collection";
-import {useLocation, useNavigate} from "react-router";
+import {useNavigate} from "react-router";
 import {changeLanguage, getMe} from "../../store/reducer/user";
 import {LANGUAGE, MODE} from "../../util/constants";
 import {ENG, RUS} from "../../util/constants/language";
@@ -28,7 +28,6 @@ function Main({
                   getItemsByTag,
                   download,
                   changeLanguage,
-                  getMe
               }) {
     const navigate = useNavigate()
 
@@ -42,6 +41,7 @@ function Main({
 
 
     useEffect(() => {
+        if(!localStorage.getItem(MODE)) { localStorage.setItem(MODE, true)}
         getTags()
         getLatest()
         getMe()
@@ -54,13 +54,14 @@ function Main({
         changeLanguage(user.id, lang)
     }
 
+    console.log('user-from-main',user)
 
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            <Header mode={mode} setMode={setMode} title={lan === ENG ? "Collection Management" : 'Управление коллекцией'} lan={lan} tags={tags}
+            <Header mode={mode} setMode={setMode} title={'🅲🅾🅻🅻🅴🅲🆃🅸🅽'} lan={lan} tags={tags}
                     choose_tag={choose_tag} changeLan={changeLan}
-                    user={user}/>
+                    user={user} />
             {content ? content : collections[0] ? <main>
                 <MainFeaturedPost collection={collections[0]} getItemsByCollectionId={getItemsByCollectionId}
                                   download={download}/>
@@ -75,8 +76,9 @@ function Main({
             </main> : ''}
             <Footer
                 mode={mode}
-                title={lan === ENG ? "Collection Management" : 'Управление коллекцией'}
-                description={lan === ENG  ? "Collections management involves the development, storage, and preservation of cultural property, as well as objects of contemporary culture (including contemporary art, literature, technology, and documents) in museums, libraries, archives and private collections." : 'Управление коллекциями включает разработку, хранение и сохранение культурных ценностей, а также предметов современной культуры (включая современное искусство, литературу, технику и документы) в музеях, библиотеках, архивах и частных коллекциях.'}
+                title={lan === ENG ? 'Online Creating Personal Collection' : 'Онлайн-создание личных коллекций'}
+                description={lan === ENG ? 'You can create a Business Collection template for payments that are made on a regular basis and contain much of the same information.' :
+                    'Вы можете создать шаблон бизнес-коллекции для платежей, которые производятся на регулярной основе и содержат большую часть одинаковой информации.'}
             />
         </ThemeProvider>
     );

@@ -154,9 +154,10 @@ function AddItem({user, collections, tags, fields, getAllCollectionsByUserId, ge
                                             {lan===ENG?'Choose Tags':'Выберите теги'}:</Button>
                                         {
                                             tags.map(item => (
+                                                //tems without 2 languages
                                                 < Button size={'small'} about={btnType} key={item.id}
                                                          variant={tag_ids.includes(item.id) ? 'contained' : 'outlined'}
-                                                         onClick={() => handleChooseTag(item.id)}>{lan===ENG ? item.name_eng : item.name_rus}
+                                                         onClick={() => handleChooseTag(item.id)}>{lan===ENG ? item.name : item.name}
                                                 </Button>
                                             ))
                                         }

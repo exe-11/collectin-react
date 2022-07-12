@@ -6,13 +6,12 @@ import {
     clearImg,
     getAllCollectionsByUserId,
     getItemsByCollectionId,
-    deleteCollection, download
+    deleteCollection, download, getAllCollectionForAdmin
 } from "../../../store/reducer/collection";
 import {createTheme, ThemeProvider} from "@mui/material/styles";
 import {ADD_COLLECTION, COLLECTION_LIST} from "../../../util/constants/pages";
 import AddItem from "../../../component/collection/addItem";
 import AddCollection from "../../../component/collection/addCollection";
-
 
 
 const theme = createTheme();
@@ -22,6 +21,7 @@ function CollectionContent({
                                collections,
                                collectionPageVal,
                                getItemsByCollectionId,
+                               getAllCollectionForAdmin,
                                clearImg,
                                getAllCollectionsByUserId,
                                deleteCollection,
@@ -32,7 +32,15 @@ function CollectionContent({
     useEffect(() => {
         clearImg()
         console.log("user", user)
-        user.id && getAllCollectionsByUserId(user.id)
+        if (user.id) {
+            console.log("user_id", user.id)
+            if ((user.roles & 2) === 2) {
+                console.log("user.roles", user.roles)
+                getAllCollectionForAdmin()
+            } else {
+                getAllCollectionsByUserId(user.id)
+            }
+        }
     }, [user])
 
     return (
@@ -42,9 +50,10 @@ function CollectionContent({
                     collectionPageVal === COLLECTION_LIST ? <Grid container spacing={4} alignItems={'center'}>
                         {
                             collections.map(collection => (
-                                <FeaturedPost download={download} key={collection.id} collection={collection} user_id={user.id}
+                                <FeaturedPost download={download} key={collection.id} collection={collection}
+                                              user_id={user.id}
                                               getItemsByCollectionId={getItemsByCollectionId}
-                                              deleteCollection={deleteCollection}/>
+                                              deleteCollection={deleteCollection} collections ={collections}/>
                             ))}
                     </Grid> : collectionPageVal === ADD_COLLECTION ? <AddCollection/> : <AddItem/>
                 }
@@ -58,5 +67,6 @@ export default connect(({collection: {collections}}) => ({collections}), ({
     getAllCollectionsByUserId,
     clearImg,
     deleteCollection,
+    getAllCollectionForAdmin,
     download
 }))(CollectionContent)
