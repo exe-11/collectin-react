@@ -1,10 +1,11 @@
 import {ENG} from "./language";
 
-const BACK_HOST = 'collectserver-env.eba-ujipkvzn.us-east-1.elasticbeanstalk.com:8080'
+// const BACK_HOST = 'collectserver-env.eba-ujipkvzn.us-east-1.elasticbeanstalk.com:8080'
+const BACK_HOST = '3.222.113.96 :8080'
 const FRONT_HOST = '3.222.113.96:3000'
 // const BACK_HOST = '127.0.0.1:8080'
 // const FRONT_HOST = '127.0.0.1:3000'
-// Fixedg
+// Fixed
 
 export const BASE_URL = 'http://' + BACK_HOST;
 
